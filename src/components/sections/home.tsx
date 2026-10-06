@@ -1,8 +1,8 @@
+import { RESUME_URL } from "@/App";
 import type { ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
 import { useMemo } from "react";
 import { Button } from "../ui/button";
-import { RESUME_URL } from "@/App";
 
 const SET_PARTICLE_COUNT = 120;
 export default function HomeSection() {
@@ -106,7 +106,12 @@ export default function HomeSection() {
                     <h1 className="text-6xl font-bold text-center select-none">Sunghoon Park</h1>
                     <label className="text-2xl font-semibold text-center select-none">a Web Developer</label>
                     <div className="flex gap-2 mt-6">
-                        <Button variant="outline" size="lg" className="px-4 py-1">
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="px-4 py-1"
+                            onClick={() => window.open("#projects", "_self", "noopener,noreferrer")}
+                        >
                             Projects
                         </Button>
                         <Button
