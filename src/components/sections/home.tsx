@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import type { ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
 import { useMemo } from "react";
-import { LuSun } from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuSun } from "react-icons/lu";
 import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
 
@@ -143,6 +143,18 @@ export default function HomeSection() {
                     <a href="mailto:pshsh0626@gmail.com">
                         <Button variant="default" size="lg" className="px-4 py-1">
                             Contact
+                        </Button>
+                    </a>
+                </div>
+                <div className="flex gap-1 mt-4">
+                    <a href="https://github.com/pshsh0626" target="_blank" rel="noopener noreferrer">
+                        <Button variant="ghost">
+                            <LuGithub />
+                        </Button>
+                    </a>
+                    <a href="https://www.linkedin.com/in/psh0626" target="_blank" rel="noopener noreferrer">
+                        <Button variant="ghost">
+                            <LuLinkedin />
                         </Button>
                     </a>
                 </div>

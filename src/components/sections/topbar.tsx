@@ -29,7 +29,7 @@ export default function TopBar() {
         <header
             ref={topBar}
             className={cn([
-                "fixed top-0 z-1",
+                "fixed top-0 z-10",
                 "w-full border-b",
                 "bg-background/90",
                 "opacity-0 -translate-y-20 transition-all duration-700",
@@ -55,7 +55,8 @@ export default function TopBar() {
                             "before:absolute before:-inset-1 before:-inset-x-2 before:-skew-y-3 before:bg-pink-500 before:duration-300",
                         )}
                     >
-                        <span className="inline-block relative -skew-y-3 text-white">SUNGHOON PARK</span>
+                        <span className="inline-block sm:hidden relative -skew-y-3 text-white">SP</span>
+                        <span className="hidden sm:inline-block relative -skew-y-3 text-white">SUNGHOON PARK</span>
                     </span>
                 </div>
 
@@ -85,7 +86,10 @@ export default function TopBar() {
                                 {["TrackPost", "Postnet Plus", "BookCollector"].map((project, idx) => (
                                     <li
                                         key={idx}
-                                        className="hover:text-shadow-lg hover:text-accent hover:bg-zinc-800 px-2 py-1 transition-all duration-200"
+                                        className={cn(
+                                            "hover:text-shadow-lg hover:text-accent-foreground hover:bg-accent",
+                                            "px-2 py-1 transition-all duration-200",
+                                        )}
                                     >
                                         {project}
                                     </li>
@@ -102,7 +106,7 @@ export default function TopBar() {
                         Resume
                     </Button>
                     <a href="mailto:pshsh0626@gmail.com">
-                        <Button variant="secondary" size="xs" className="">
+                        <Button variant="default" size="xs" className="">
                             Contact
                         </Button>
                     </a>
