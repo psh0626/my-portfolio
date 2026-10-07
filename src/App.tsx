@@ -1,6 +1,8 @@
 // import "./App.css";
+import { useState, type MouseEventHandler } from "react";
 import HomeSection from "./components/sections/home";
 import TopBar from "./components/sections/topbar";
+import { useMediaQuery } from "./lib/use-media-query";
 import { cn } from "./lib/utils";
 import "/trackpost.png";
 
@@ -13,6 +15,7 @@ function ThumbnailCard({
     backDescription,
     imageUrl,
     className,
+    onClick,
 }: {
     frontTitle: string;
     frontDescription: string;
@@ -20,18 +23,41 @@ function ThumbnailCard({
     backDescription?: string;
     imageUrl: string;
     className?: string;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }) {
+    const [isTouched, setIsTouched] = useState(false);
+    const isMobileDevice = useMediaQuery("(pointer: coarse)");
+    const clickFunc: MouseEventHandler<HTMLDivElement> = (event) => {
+        if (onClick) {
+            if (isMobileDevice) {
+                if (isTouched) onClick(event);
+            } else {
+                onClick(event);
+            }
+        }
+    };
     return (
-        <div className={cn("group relative h-28 sm:h-72 w-full perspective-midrange", className)}>
-            <div className="relative h-full w-full transition-transform duration-700 transform-3d group-hover:-rotate-y-180 group-hover:scale-110">
+        <div
+            className={cn("group relative h-28 sm:h-72 w-full perspective-midrange", className)}
+            onClick={clickFunc}
+            onTouchStart={() => setIsTouched(true)}
+            onTouchEnd={() => setTimeout(() => setIsTouched(false), 2000)}
+        >
+            <div
+                className={cn(
+                    "relative h-full w-full",
+                    "transition-transform duration-700 transform-3d group-hover:-rotate-y-180 group-hover:scale-110",
+                    isTouched ? "-rotate-y-180 scale-110" : "",
+                )}
+            >
                 {/* Front */}
                 <div className="absolute inset-0 flex flex-row sm:flex-col items-center justify-start sm:justify-center overflow-hidden bg-gray-200 p-4 shadow-md dark:bg-gray-800 backface-hidden">
                     <img src={imageUrl} alt={frontTitle} className="my-4 sm:mt-0 mr-4 sm:mr-0 w-20" />
                     <div className="flex flex-col">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-center">
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 text-left sm:text-center">
                             {frontTitle}
                         </h3>
-                        <p className="text-center text-gray-600 dark:text-gray-400">{frontDescription}</p>
+                        <p className="text-left sm:text-center text-gray-600 dark:text-gray-400">{frontDescription}</p>
                     </div>
                 </div>
                 {/* Back */}
@@ -77,6 +103,7 @@ function ThumbnailSection() {
                     frontDescription="Chrome Extension TypeScript/React"
                     imageUrl="/trackpost.png"
                     backDescription="extracts and analyzes postal data, populates required forms, and enhances workflow efficiency through additional utility functions."
+                    onClick={() => window.open("#TrackPost", "_self")}
                 />
                 <ThumbnailCard
                     className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_35%_cover_40%]"
@@ -84,6 +111,7 @@ function ThumbnailSection() {
                     frontDescription="Chrome Extension Javascript"
                     imageUrl="/postnet-plus.png"
                     backDescription="enhances the legacy Postnet system by automating repetitive tasks and adding streamlined productivity features."
+                    onClick={() => window.open("#PostnetPlus", "_self")}
                 />
                 <ThumbnailCard
                     className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_0%_cover_30%]"
@@ -91,6 +119,7 @@ function ThumbnailSection() {
                     frontDescription="VBA macro PowerQuery M"
                     imageUrl="/excel.png"
                     backDescription="consolidates and validates daily report data, transforming hours of manual work into accurate, audit‑ready outputs."
+                    onClick={() => window.open("#BookCollector", "_self")}
                 />
             </div>
         </section>
@@ -100,26 +129,26 @@ function ThumbnailSection() {
 function Project1() {
     return (
         <>
-            <div className="min-h-dvh w-full bg-[#DB9558] dark:bg-[#1B1A55]">
+            <section id="TrackPost" className="min-h-dvh w-full bg-[#DB9558] dark:bg-[#1B1A55]">
                 <span>Project 1</span>
-            </div>
+            </section>
         </>
     );
 }
 
 function Project2() {
     return (
-        <div className="min-h-dvh w-full bg-[#97A87A] dark:bg-gray-900">
+        <section id="PostnetPlus" className="min-h-dvh w-full bg-[#97A87A] dark:bg-gray-900">
             <span>Project 2</span>
-        </div>
+        </section>
     );
 }
 
 function Project3() {
     return (
-        <div className="min-h-dvh w-full bg-[#A8BBA3] dark:bg-[#A8BBA3]">
+        <section id="BookCollector" className="min-h-dvh w-full bg-[#A8BBA3] dark:bg-[#A8BBA3]">
             <span>Project 3</span>
-        </div>
+        </section>
     );
 }
 function App() {
