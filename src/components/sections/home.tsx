@@ -1,17 +1,22 @@
 import { RESUME_URL } from "@/App";
+import { cn } from "@/lib/utils";
 import type { ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
 import { useMemo } from "react";
+import { LuSun } from "react-icons/lu";
+import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
 
 const SET_PARTICLE_COUNT = 120;
 export default function HomeSection() {
+    const { theme, setTheme } = useTheme();
+
     const particleOptions = useMemo(
         () =>
             ({
                 fullScreen: { enable: false },
                 background: {
-                    color: "#222222",
+                    color: "hsl(var(--background))",
                     size: "100% 100%",
                 },
                 particles: {
@@ -22,8 +27,8 @@ export default function HomeSection() {
                             area: 800,
                         },
                     },
-                    color: {
-                        value: "#ffffff",
+                    paint: {
+                        color: theme === "dark" ? "#ffffff" : "#333333",
                     },
                     shape: {
                         type: "triangle",
@@ -38,9 +43,14 @@ export default function HomeSection() {
                     links: {
                         enable: true,
                         distance: 150,
-                        color: "#ffffff",
+                        color: theme === "dark" ? "#ffffff" : "#333333",
                         opacity: 0.8,
                         width: 1,
+                        triangles: {
+                            enable: true,
+                            color: theme === "dark" ? "#ffffff" : "#333333",
+                            opacity: 0.1,
+                        },
                     },
                     move: {
                         enable: true,
@@ -86,7 +96,7 @@ export default function HomeSection() {
                 },
                 retina_detect: true,
             }) as ISourceOptions,
-        [],
+        [theme],
     );
 
     const responsiveOptions = useMemo(
@@ -99,40 +109,44 @@ export default function HomeSection() {
     );
 
     return (
-        <>
-            <section id="home" className="min-h-dvh w-full bg-background">
-                <Particles id="bg-particles" options={responsiveOptions} className="w-full h-dvh" />
-                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white">
-                    <h1 className="text-6xl font-bold text-center select-none">Sunghoon Park</h1>
-                    <label className="text-2xl font-semibold text-center select-none">a Web Developer</label>
-                    <div className="flex gap-2 mt-6">
-                        <Button
-                            variant="outline"
-                            size="lg"
-                            className="px-4 py-1"
-                            onClick={() => window.open("#projects", "_self", "noopener,noreferrer")}
-                        >
-                            Projects
-                        </Button>
-                        <Button
-                            variant="outline"
-                            size="lg"
-                            className="px-4 py-1"
-                            onClick={() => window.open(RESUME_URL, "_blank")}
-                        >
-                            Resume
-                        </Button>
-                        <Button
-                            variant="default"
-                            size="lg"
-                            className="px-4 py-1"
-                            onClick={() => window.open("mailto:pshsh0626@gmail.com", "_blank")}
-                        >
+        <section id="home" className="min-h-dvh w-full bg-background">
+            <Button
+                variant="outline"
+                onClick={() => {
+                    setTheme(theme === "dark" ? "light" : "dark");
+                }}
+                className={cn("absolute top-5 right-5 z-10")}
+            >
+                <LuSun />
+            </Button>
+            <Particles id="bg-particles" options={responsiveOptions} className="w-full h-dvh" />
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+                <h1 className="text-6xl font-bold text-center select-none">Sunghoon Park</h1>
+                <label className="text-2xl font-semibold text-center select-none">a Web Developer</label>
+                <div className="flex gap-2 mt-6">
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="px-4 py-1"
+                        onClick={() => window.open("#projects", "_self", "noopener,noreferrer")}
+                    >
+                        Projects
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="px-4 py-1"
+                        onClick={() => window.open(RESUME_URL, "_blank")}
+                    >
+                        Resume
+                    </Button>
+                    <a href="mailto:pshsh0626@gmail.com">
+                        <Button variant="default" size="lg" className="px-4 py-1">
                             Contact
                         </Button>
-                    </div>
+                    </a>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 }
