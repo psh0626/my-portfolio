@@ -147,7 +147,7 @@ export default function HomeSection() {
                     </a>
                 </div>
                 <div className="flex gap-1 mt-4">
-                    <a href="https://github.com/pshsh0626" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/psh0626" target="_blank" rel="noopener noreferrer">
                         <Button variant="ghost">
                             <LuGithub />
                         </Button>
