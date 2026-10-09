@@ -2,6 +2,7 @@ import { isString } from "@tsparticles/engine";
 import { cn } from "cn";
 import React, { useState, type ReactElement, type ReactNode } from "react";
 import { LuChevronLeft, LuChevronRight, LuDot } from "react-icons/lu";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./dialog";
 
 interface BaseLayoutProps {
     children?: ReactNode;
@@ -44,6 +45,7 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
 
     const changePage = (where: "prev" | "next") => {
         setCurrentPage((p) => {
+            if (pageMedia.length === 0) return 0;
             if (where === "next") {
                 if (p >= pageMedia.length - 1) return 0;
                 return p + 1;
@@ -53,6 +55,13 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
             }
         });
     };
+
+    const renderMedia = () =>
+        isString(currentMedia) ? (
+            <img src={currentMedia} className="object-contain max-h-full max-w-full" loading="lazy" decoding="async" />
+        ) : (
+            currentMedia
+        );
 
     return (
         <div className="relative size-4/5 bg-card shadow-2xl flex flex-col">
@@ -73,17 +82,21 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
             {/* CONTENT */}
             <div className="grow relative flex flex-col md:flex-row min-h-0">
                 {/* MEDIA */}
-                <div className={cn("flex-1", "p-4 bg-accent min-h-0 md:min-h-full", "flex justify-center")}>
-                    {isString(currentMedia) ? (
-                        <img src={currentMedia} className="object-contain max-h-full max-w-full" />
-                    ) : (
-                        currentMedia
-                    )}
+                <div className={cn("flex-1", "p-4 bg-accent min-h-1/2 md:min-h-full", "flex justify-center")}>
+                    <Dialog>
+                        <DialogTrigger>{renderMedia()}</DialogTrigger>
+                        <DialogContent>
+                            <DialogTitle>Photo viewer</DialogTitle>
+                            <DialogDescription>{renderMedia()}</DialogDescription>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 {/* DESCRIPTION */}
-                <div className={cn("flex-1 bg-amber-700 dark:bg-card", "p-4", "flex md:items-center")}>
-                    <span className="text-card p-4 dark:text-gray-200">{currentDescription}</span>
+                <div className={cn("flex-1 bg-amber-700 dark:bg-card", "max-h-1/2 p-4", "flex md:items-center")}>
+                    <span className="text-card p-4 dark:text-gray-200 whitespace-break-spaces">
+                        {currentDescription}
+                    </span>
                 </div>
 
                 {/* LEFT ARROW */}

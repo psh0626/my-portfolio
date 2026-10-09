@@ -1,7 +1,9 @@
 import { cn } from "cn";
+import { LuGithub } from "react-icons/lu";
 import HomeSection from "./components/sections/home";
 import ThumbnailSection from "./components/sections/thumanail";
 import TopBar from "./components/sections/topbar";
+import { Button } from "./components/ui/button";
 import { ProjectDescription, ProjectLayout, ProjectMedia } from "./components/ui/project-layout";
 
 export const RESUME_URL = "https://1drv.ms/b/c/79782aecfec469b0/IQBNAwRubc9uR6d-CU8XM0tsAXf7lsVLEMHi7_7jMKbZyrw";
@@ -21,9 +23,15 @@ function Project1() {
                 <ProjectMedia src="https://github.com/user-attachments/assets/e6d02ac7-7d31-46fc-98d5-04eb1735c63a" />
                 <ProjectDescription>
                     TrackPost is a Chrome extension that streamlines cross-border mail tracking and inquiry systems for
-                    postal agents within the Universal Postal Union (UPU) and the Kahala Posts Group (KPG). <br />
-                    Postal agents rely on platforms like GCSS and iCare to handle inter-agency communications including
-                    item location tracking, address alteration requests, and status updates.
+                    postal agents... <br />
+                    (more on GitHub below)
+                    <br />
+                    <br />
+                    <a href="https://github.com/psh0626/TrackPostCrxJS/tree/main#--trackpost--" target="_blank">
+                        <Button variant="outline" className={"w-full"}>
+                            <LuGithub className="size-5" />
+                        </Button>
+                    </a>
                 </ProjectDescription>
                 <ProjectMedia src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=90" />
                 <ProjectDescription></ProjectDescription>
