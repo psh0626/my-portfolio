@@ -32,6 +32,11 @@ export function ProjectTitle({ children }: BaseLayoutProps) {
 
 export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps) {
     const [currentPage, setCurrentPage] = useState(0);
+    const [pageTransition, setPageTransition] = useState<{
+        from: number;
+        to: number;
+        direction: "prev" | "next";
+    } | null>(null);
 
     const childrenArr = React.Children.toArray(children) as ReactElement[];
 
@@ -41,27 +46,44 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
 
     const pageDescs = childrenArr.filter((c) => c.type === ProjectDescription);
 
-    const [currentMedia, currentDescription] = [pageMedia.at(currentPage), pageDescs.at(currentPage)];
-
-    const changePage = (where: "prev" | "next") => {
-        setCurrentPage((p) => {
-            if (pageMedia.length === 0) return 0;
-            if (where === "next") {
-                if (p >= pageMedia.length - 1) return 0;
-                return p + 1;
-            } else {
-                if (p <= 0) return pageMedia.length - 1;
-                return p - 1;
-            }
-        });
+    const goToPage = (to: number, direction: "prev" | "next") => {
+        if (pageTransition || pageMedia.length === 0 || to === currentPage) return;
+        setPageTransition({ from: currentPage, to, direction });
     };
 
-    const renderMedia = () =>
-        isString(currentMedia) ? (
-            <img src={currentMedia} className="object-contain max-h-full max-w-full" loading="lazy" decoding="async" />
-        ) : (
-            currentMedia
-        );
+    const changePage = (where: "prev" | "next") => {
+        if (pageTransition || pageMedia.length === 0) return;
+
+        const to =
+            where === "next"
+                ? (currentPage + 1) % pageMedia.length
+                : (currentPage - 1 + pageMedia.length) % pageMedia.length;
+
+        goToPage(to, where);
+    };
+
+    const renderPage = (page: number, className: string, onAnimationEnd?: () => void) => (
+        <div className={cn("absolute inset-0 flex flex-col md:flex-row", className)} onAnimationEnd={onAnimationEnd}>
+            <div className={cn("flex-1", "p-4 bg-accent min-h-1/2 md:min-h-full", "flex justify-center")}>
+                <Dialog>
+                    <DialogTrigger>{pageMedia[page]}</DialogTrigger>
+                    <DialogContent>
+                        <DialogTitle>Photo viewer</DialogTitle>
+                        <DialogDescription>{pageMedia[page]}</DialogDescription>
+                    </DialogContent>
+                </Dialog>
+            </div>
+            <div
+                className={cn(
+                    "flex-1 bg-amber-700 dark:bg-card",
+                    "max-h-1/2 md:max-h-none p-4",
+                    "flex md:items-center",
+                )}
+            >
+                <span className="text-card p-4 dark:text-gray-200 whitespace-break-spaces">{pageDescs[page]}</span>
+            </div>
+        </div>
+    );
 
     return (
         <div className="relative size-4/5 bg-card shadow-2xl flex flex-col">
@@ -80,24 +102,29 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
             </div>
 
             {/* CONTENT */}
-            <div className="grow relative flex flex-col md:flex-row min-h-0">
-                {/* MEDIA */}
-                <div className={cn("flex-1", "p-4 bg-accent min-h-1/2 md:min-h-full", "flex justify-center")}>
-                    <Dialog>
-                        <DialogTrigger>{renderMedia()}</DialogTrigger>
-                        <DialogContent>
-                            <DialogTitle>Photo viewer</DialogTitle>
-                            <DialogDescription>{renderMedia()}</DialogDescription>
-                        </DialogContent>
-                    </Dialog>
-                </div>
-
-                {/* DESCRIPTION */}
-                <div className={cn("flex-1 bg-amber-700 dark:bg-card", "max-h-1/2 p-4", "flex md:items-center")}>
-                    <span className="text-card p-4 dark:text-gray-200 whitespace-break-spaces">
-                        {currentDescription}
-                    </span>
-                </div>
+            <div className="grow relative flex flex-col md:flex-row min-h-0 overflow-hidden animate-slide-distance-[100%] animate">
+                {pageTransition ? (
+                    <>
+                        {renderPage(
+                            pageTransition.from,
+                            pageTransition.direction === "next"
+                                ? "animate-slide-out-left pointer-events-none animate-duration-300 animate-bezier-quad-in-out"
+                                : "animate-slide-out-right pointer-events-none animate-duration-300 animate-bezier-quad-in-out",
+                        )}
+                        {renderPage(
+                            pageTransition.to,
+                            pageTransition.direction === "next"
+                                ? "animate-slide-in-right animate-duration-300 animate-bezier-quad-in-out"
+                                : "animate-slide-in-left animate-duration-300 animate-bezier-quad-in-out",
+                            () => {
+                                setCurrentPage(pageTransition.to);
+                                setPageTransition(null);
+                            },
+                        )}
+                    </>
+                ) : (
+                    renderPage(currentPage, "")
+                )}
 
                 {/* LEFT ARROW */}
                 <div
@@ -124,14 +151,23 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                     <LuChevronRight className="text-white/70 text-4xl" />
                 </div>
                 {/* PAGE INDICATOR */}
-                <div className="absolute size-full flex justify-center items-end pointer-events-none transition-all">
-                    {Array.from({ length: pageMedia.length }, (_, idx) =>
-                        idx === currentPage ? (
-                            <LuDot key={idx} className="text-3xl" />
-                        ) : (
-                            <LuDot key={idx} className="text-2xl" />
-                        ),
-                    )}
+                <div className="absolute size-full flex justify-center items-end pointer-events-none">
+                    {Array.from({ length: pageMedia.length }, (_, idx) => {
+                        const isCurrentPage = idx === (pageTransition?.to ?? currentPage);
+                        return (
+                            <button
+                                key={idx}
+                                type="button"
+                                className="pointer-events-auto cursor-pointer p-1"
+                                aria-label={`Go to page ${idx + 1}`}
+                                aria-current={isCurrentPage ? "page" : undefined}
+                                disabled={Boolean(pageTransition)}
+                                onClick={() => goToPage(idx, idx > currentPage ? "next" : "prev")}
+                            >
+                                <LuDot className={cn("transition-all", isCurrentPage ? "size-8" : "size-6")} />
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
         </div>

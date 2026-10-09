@@ -90,6 +90,7 @@ export default function TopBar() {
                                             "hover:text-shadow-lg hover:text-accent-foreground hover:bg-accent",
                                             "px-2 py-1 transition-all duration-200",
                                         )}
+                                        onClick={() => window.open("#" + project.replaceAll(" ", ""), "_self")}
                                     >
                                         {project}
                                     </li>
