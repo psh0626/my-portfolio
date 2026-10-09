@@ -62,19 +62,19 @@ export function ThumbnailCard({
                 )}
             >
                 {/* Front */}
-                <div className="absolute inset-0 flex flex-row sm:flex-col items-center justify-start sm:justify-center overflow-hidden bg-gray-200 p-4 shadow-md dark:bg-gray-800 backface-hidden">
+                <div className="absolute inset-0 flex flex-row sm:flex-col items-center justify-start sm:justify-center overflow-hidden bg-card p-4 shadow-md backface-hidden">
                     <img src={imageUrl} alt={frontTitle} className="my-4 sm:mt-0 mr-4 sm:mr-0 w-20" />
                     <div className="flex flex-col">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 text-left sm:text-center">
+                        <h3 className="text-lg font-semibold text-card-foreground text-left sm:text-center">
                             {frontTitle}
                         </h3>
                         <p className="text-left sm:text-center text-gray-600 dark:text-gray-400">{frontDescription}</p>
                     </div>
                 </div>
                 {/* Back */}
-                <div className="absolute inset-0 flex flex-col items-start sm:items-center justify-center bg-gray-200 p-4 shadow-md dark:bg-gray-800 backface-hidden -rotate-y-180 @container">
+                <div className="absolute inset-0 flex flex-col items-start sm:items-center justify-center bg-card p-4 shadow-md backface-hidden -rotate-y-180 @container">
                     <div className="text-[2cqh] w-full h-full inline sm:flex sm:flex-wrap">
-                        <span className="inline text-lg font-semibold text-gray-800 dark:text-gray-200 mr-1 sm:self-end">
+                        <span className="inline text-lg font-semibold text-card-foreground mr-1 sm:self-end">
                             {backTitle || frontTitle}
                         </span>
                         <p
