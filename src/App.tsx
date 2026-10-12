@@ -5,6 +5,7 @@ import ThumbnailSection from "./components/sections/thumanail";
 import TopBar from "./components/sections/topbar";
 import { Button } from "./components/ui/button";
 import { ProjectDescription, ProjectLayout, ProjectMedia } from "./components/ui/project-layout";
+import { Separator } from "./components/ui/separator";
 
 export const RESUME_URL = "https://1drv.ms/b/c/79782aecfec469b0/IQBNAwRubc9uR6d-CU8XM0tsAXf7lsVLEMHi7_7jMKbZyrw";
 
@@ -13,7 +14,7 @@ function Project1() {
         <section
             id="TrackPost"
             className={cn(
-                "h-dvh w-full",
+                "h-svh w-full",
                 "bg-[#DB9558]",
                 "dark:bg-linear-to-b dark:from-[#1B1A55] dark:to-background",
                 "flex justify-center items-center",
@@ -22,14 +23,16 @@ function Project1() {
             <ProjectLayout Title="TrackPost" SubTitle="Chrome Extension - TypeScript/React">
                 <ProjectMedia src="https://github.com/user-attachments/assets/e6d02ac7-7d31-46fc-98d5-04eb1735c63a" />
                 <ProjectDescription>
-                    TrackPost is a Chrome extension that streamlines cross-border mail tracking and inquiry systems for
-                    postal agents... <br />
-                    (more on GitHub below)
-                    <br />
-                    <br />
+                    <h3 className="font-bold uppercase">Introduction</h3>
+                    <Separator className={"mt-2 mb-4"} />
+                    <p className="mb-3">
+                        TrackPost is a Chrome extension that streamlines cross-border inquiry systems for postal
+                        agents...
+                    </p>
                     <a href="https://github.com/psh0626/TrackPostCrxJS/tree/main#--trackpost--" target="_blank">
                         <Button variant="outline" className={"w-full"}>
                             <LuGithub className="size-5" />
+                            Explore Project Details
                         </Button>
                     </a>
                 </ProjectDescription>

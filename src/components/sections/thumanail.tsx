@@ -6,7 +6,7 @@ export default function ThumbnailSection() {
         <section
             id="projects"
             className={cn(
-                "relative min-h-dvh w-full",
+                "relative min-h-svh w-full",
                 "flex items-center justify-center",
                 "bg-linear-to-b from-background to-[#DB9558] dark:to-[#1B1A55]",
             )}

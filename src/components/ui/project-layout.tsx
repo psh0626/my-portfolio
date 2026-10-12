@@ -1,8 +1,8 @@
-import { isString } from "@tsparticles/engine";
 import { cn } from "cn";
 import React, { useState, type ReactElement, type ReactNode } from "react";
 import { LuChevronLeft, LuChevronRight, LuDot } from "react-icons/lu";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./dialog";
+import { ScrollArea } from "./scroll-area";
 
 interface BaseLayoutProps {
     children?: ReactNode;
@@ -18,9 +18,20 @@ interface WithoutTitleProps extends BaseLayoutProps {
     SubTitle?: never;
 }
 type ProjectLayoutProps = WithTitleProps | WithoutTitleProps;
-export function ProjectMedia({ src, children }: BaseLayoutProps & { src: string }) {
-    if (src && isString(src)) return <img src={src} className="object-contain max-h-full max-w-full" />;
-    return <>{children}</>;
+export function ProjectMedia({ src, children }: BaseLayoutProps & { src?: string }) {
+    if (src) {
+        return <img src={src} className="object-contain max-h-full max-w-full" />;
+    }
+
+    return React.Children.map(children, (child) => {
+        if (!React.isValidElement<{ className?: string }>(child) || child.type !== "img") {
+            return child;
+        }
+
+        return React.cloneElement(child, {
+            className: cn("object-contain max-h-full max-w-full", child.props.className),
+        });
+    });
 }
 export function ProjectDescription({ children }: BaseLayoutProps) {
     return <>{children}</>;
@@ -68,19 +79,17 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                 <Dialog>
                     <DialogTrigger>{pageMedia[page]}</DialogTrigger>
                     <DialogContent>
-                        <DialogTitle>Photo viewer</DialogTitle>
+                        <DialogTitle className={"font-sans"}>Photo viewer</DialogTitle>
                         <DialogDescription>{pageMedia[page]}</DialogDescription>
                     </DialogContent>
                 </Dialog>
             </div>
-            <div
-                className={cn(
-                    "flex-1 bg-amber-700 dark:bg-card",
-                    "max-h-1/2 md:max-h-none p-4",
-                    "flex md:items-center",
-                )}
-            >
-                <span className="text-card p-4 dark:text-gray-200 whitespace-break-spaces">{pageDescs[page]}</span>
+            <div className={cn("flex-1 bg-amber-700 dark:bg-card", "max-h-1/2 md:max-h-none p-4", "flex")}>
+                <ScrollArea className={"p-4"}>
+                    <span className="text-card dark:text-gray-200 whitespace-break-spaces text-justify">
+                        {pageDescs[page]}
+                    </span>
+                </ScrollArea>
             </div>
         </div>
     );
@@ -125,7 +134,6 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                 ) : (
                     renderPage(currentPage, "")
                 )}
-
                 {/* LEFT ARROW */}
                 <div
                     className={cn(
