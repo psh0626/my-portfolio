@@ -9,19 +9,19 @@ interface BaseLayoutProps {
     children?: ReactNode;
 }
 interface DescriptionProps extends BaseLayoutProps {
-    Title?: string;
+    title?: string;
 }
 interface MediaProps extends BaseLayoutProps {
     src?: string | string[];
 }
 interface WithTitleProps extends BaseLayoutProps {
-    Title: string; // Title이 있으면
-    SubTitle: string; // SubTitle도 무조건 있어야 함! (선택형 '?' 제거)
+    title: string; // Title이 있으면
+    subTitle: string; // SubTitle도 무조건 있어야 함! (선택형 '?' 제거)
 }
 
 interface WithoutTitleProps extends BaseLayoutProps {
-    Title?: never;
-    SubTitle?: never;
+    title?: never;
+    subTitle?: never;
 }
 type ProjectLayoutProps = WithTitleProps | WithoutTitleProps;
 export function ProjectMedia({ src, children }: MediaProps) {
@@ -48,12 +48,12 @@ export function ProjectMedia({ src, children }: MediaProps) {
         });
     });
 }
-export function ProjectDescription({ Title, children }: DescriptionProps) {
+export function ProjectDescription({ title, children }: DescriptionProps) {
     return (
         <>
-            {Title && (
+            {title && (
                 <>
-                    <h3 className="font-bold uppercase">{Title}</h3>
+                    <h3 className="font-bold uppercase">{title}</h3>
                     <Separator className="mt-2 mb-4" />
                 </>
             )}
@@ -66,7 +66,7 @@ export function ProjectTitle({ children }: BaseLayoutProps) {
     return <>{children}</>;
 }
 
-export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps) {
+export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps) {
     const [currentPage, setCurrentPage] = useState(0);
     const [pageTransition, setPageTransition] = useState<{
         from: number;
@@ -121,7 +121,7 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                 </Dialog>
             </div>
             <div className={cn("flex-1 bg-amber-700 dark:bg-card", "max-h-1/2 md:max-h-none p-4", "flex")}>
-                <ScrollArea className={"p-4"}>
+                <ScrollArea className={"p-4 w-full"}>
                     <span className="text-card dark:text-gray-200 whitespace-break-spaces text-justify">
                         {pageDescs[page]}
                     </span>
@@ -138,10 +138,8 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                     titleElement
                 ) : (
                     <>
-                        <span className="text-sm absolute top-4 text-gray-300 dark:text-gray-300">
-                            {SubTitle}
-                        </span>
-                        <h2 className="text-4xl font-black tracking-tight text-card">{Title}</h2>
+                        <span className="text-sm absolute top-4 text-gray-300 dark:text-gray-300">{subTitle}</span>
+                        <h2 className="text-4xl font-black tracking-tight text-card">{title}</h2>
                     </>
                 )}
             </div>

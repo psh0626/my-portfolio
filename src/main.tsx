@@ -13,7 +13,7 @@ async function initParticles(engine: Engine) {
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <ThemeProvider defaultTheme="dark" storageKey="color-theme">
+        <ThemeProvider defaultTheme="system" storageKey="color-theme">
             <ParticlesProvider init={initParticles}>
                 <App />
             </ParticlesProvider>
