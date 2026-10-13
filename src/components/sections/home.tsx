@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import type { ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
 import { useMemo } from "react";
-import { LuGithub, LuLinkedin, LuSun } from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuMoon, LuSun } from "react-icons/lu";
 import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
 
@@ -117,7 +117,7 @@ export default function HomeSection() {
                 }}
                 className={cn("absolute top-5 right-5 z-10")}
             >
-                <LuSun />
+                {theme === "dark" ? <LuSun /> : <LuMoon />}
             </Button>
             <Particles id="bg-particles" options={responsiveOptions} className="w-full h-dvh" />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">

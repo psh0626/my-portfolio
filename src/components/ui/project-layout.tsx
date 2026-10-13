@@ -2,12 +2,18 @@ import { cn } from "cn";
 import React, { useState, type ReactElement, type ReactNode } from "react";
 import { LuChevronLeft, LuChevronRight, LuDot } from "react-icons/lu";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./dialog";
-import { ScrollArea } from "./scroll-area";
+import { ScrollArea, ScrollBar } from "./scroll-area";
+import { Separator } from "./separator";
 
 interface BaseLayoutProps {
     children?: ReactNode;
 }
-
+interface DescriptionProps extends BaseLayoutProps {
+    Title?: string;
+}
+interface MediaProps extends BaseLayoutProps {
+    src?: string | string[];
+}
 interface WithTitleProps extends BaseLayoutProps {
     Title: string; // Title이 있으면
     SubTitle: string; // SubTitle도 무조건 있어야 함! (선택형 '?' 제거)
@@ -18,8 +24,17 @@ interface WithoutTitleProps extends BaseLayoutProps {
     SubTitle?: never;
 }
 type ProjectLayoutProps = WithTitleProps | WithoutTitleProps;
-export function ProjectMedia({ src, children }: BaseLayoutProps & { src?: string }) {
+export function ProjectMedia({ src, children }: MediaProps) {
     if (src) {
+        if (Array.isArray(src)) {
+            return (
+                <>
+                    {src.map((s, idx) => (
+                        <img key={idx} src={s} className="object-contain h-full" />
+                    ))}
+                </>
+            );
+        }
         return <img src={src} className="object-contain max-h-full max-w-full" />;
     }
 
@@ -33,8 +48,18 @@ export function ProjectMedia({ src, children }: BaseLayoutProps & { src?: string
         });
     });
 }
-export function ProjectDescription({ children }: BaseLayoutProps) {
-    return <>{children}</>;
+export function ProjectDescription({ Title, children }: DescriptionProps) {
+    return (
+        <>
+            {Title && (
+                <>
+                    <h3 className="font-bold uppercase">{Title}</h3>
+                    <Separator className="mt-2 mb-4" />
+                </>
+            )}
+            {children}
+        </>
+    );
 }
 
 export function ProjectTitle({ children }: BaseLayoutProps) {
@@ -77,10 +102,21 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
         <div className={cn("absolute inset-0 flex flex-col md:flex-row", className)} onAnimationEnd={onAnimationEnd}>
             <div className={cn("flex-1", "p-4 bg-accent min-h-1/2 md:min-h-full", "flex justify-center")}>
                 <Dialog>
-                    <DialogTrigger>{pageMedia[page]}</DialogTrigger>
+                    <DialogTrigger>
+                        <ScrollArea className={"h-full w-full pb-3"}>
+                            <ScrollBar orientation="horizontal" />
+                            <div className="flex h-full gap-2 select-none">{pageMedia[page]}</div>
+                        </ScrollArea>
+                    </DialogTrigger>
                     <DialogContent>
                         <DialogTitle className={"font-sans"}>Photo viewer</DialogTitle>
-                        <DialogDescription>{pageMedia[page]}</DialogDescription>
+                        <DialogDescription>
+                            <ScrollArea>
+                                <div className="flex flex-col max-h-120 max-w-100 items-center gap-2 pr-4">
+                                    {pageMedia[page]}
+                                </div>
+                            </ScrollArea>
+                        </DialogDescription>
                     </DialogContent>
                 </Dialog>
             </div>
@@ -97,12 +133,12 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
     return (
         <div className="relative size-4/5 bg-card shadow-2xl flex flex-col">
             {/* TITLE */}
-            <div className="relative col-span-4 bg-amber-600 w-full h-30 shrink-0 flex items-end p-4">
+            <div className="relative col-span-4 bg-amber-600 w-full h-30 shrink-0 flex items-end p-4 select-none">
                 {titleElement ? (
                     titleElement
                 ) : (
                     <>
-                        <span className="text-sm absolute top-4 text-gray-300 dark:text-gray-300 select-none">
+                        <span className="text-sm absolute top-4 text-gray-300 dark:text-gray-300">
                             {SubTitle}
                         </span>
                         <h2 className="text-4xl font-black tracking-tight text-card">{Title}</h2>
@@ -151,7 +187,7 @@ export function ProjectLayout({ Title, SubTitle, children }: ProjectLayoutProps)
                     className={cn(
                         "absolute h-full w-10 right-0 top-0",
                         "flex justify-center items-center",
-                        "hover:bg-gray-400/40",
+                        "hover:bg-background/10",
                         "transition-colors",
                     )}
                     onClick={() => changePage("next")}

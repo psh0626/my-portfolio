@@ -23,7 +23,7 @@ export default function ThumbnailSection() {
                 )}
             >
                 <ThumbnailCard
-                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_0%_cover_20%]"
+                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_0%_cover_30%]"
                     frontTitle="TrackPost"
                     frontDescription="Chrome Extension TypeScript/React"
                     imageUrl="/trackpost.png"
@@ -31,7 +31,7 @@ export default function ThumbnailSection() {
                     onClick={() => window.open("#TrackPost", "_self")}
                 />
                 <ThumbnailCard
-                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_20%_cover_30%]"
+                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[100%] animate-range-[entry_0%_cover_40%]"
                     frontTitle="Postnet Plus"
                     frontDescription="Chrome Extension JavaScript"
                     imageUrl="/postnet-plus.png"
@@ -39,7 +39,7 @@ export default function ThumbnailSection() {
                     onClick={() => window.open("#PostnetPlus", "_self")}
                 />
                 <ThumbnailCard
-                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[200%] animate-range-[entry_20%_cover_30%]"
+                    className="timeline-view animate-slide-in-bottom animate-slide-distance-[200%] animate-range-[entry_20%_cover_40%]"
                     frontTitle="BookCollector"
                     frontDescription="VBA macro PowerQuery M"
                     imageUrl="/excel.png"
