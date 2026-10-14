@@ -119,7 +119,7 @@ export default function HomeSection() {
             >
                 {theme === "dark" ? <LuSun /> : <LuMoon />}
             </Button>
-            <Particles id="bg-particles" options={responsiveOptions} className="w-full h-dvh" />
+            <Particles id="bg-particles" options={responsiveOptions} className="w-full h-svh" />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
                 <h1 className="text-6xl font-bold text-center select-none">Sunghoon Park</h1>
                 <label className="text-2xl font-semibold text-center select-none">a Web Developer</label>
@@ -128,7 +128,7 @@ export default function HomeSection() {
                         variant="outline"
                         size="lg"
                         className="px-4 py-1"
-                        onClick={() => window.open("#projects", "_self", "noopener,noreferrer")}
+                        onClick={() => window.open("#Projects", "_self", "noopener,noreferrer")}
                     >
                         Projects
                     </Button>
@@ -140,11 +140,14 @@ export default function HomeSection() {
                     >
                         Resume
                     </Button>
-                    <a href="mailto:pshsh0626@gmail.com">
-                        <Button variant="default" size="lg" className="px-4 py-1">
-                            Contact
-                        </Button>
-                    </a>
+                    <Button
+                        variant="default"
+                        size="lg"
+                        className="px-4 py-1"
+                        onClick={() => window.open("#Contact", "_self")}
+                    >
+                        Contact
+                    </Button>
                 </div>
                 <div className="flex gap-1 mt-4">
                     <a href="https://github.com/psh0626" target="_blank" rel="noopener noreferrer">

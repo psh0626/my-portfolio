@@ -70,7 +70,7 @@ export default function TopBar() {
                             variant="secondary"
                             size="xs"
                             className="px-2 bg-background/10"
-                            onClick={() => window.open("#projects", "_self")}
+                            onClick={() => window.open("#Projects", "_self")}
                         >
                             Projects
                         </Button>
@@ -106,11 +106,9 @@ export default function TopBar() {
                     >
                         Resume
                     </Button>
-                    <a href="mailto:pshsh0626@gmail.com">
-                        <Button variant="default" size="xs" className="">
-                            Contact
-                        </Button>
-                    </a>
+                    <Button variant="default" size="xs" className="" onClick={() => window.open("#Contact", "_self")}>
+                        Contact
+                    </Button>
                 </div>
             </div>
         </header>

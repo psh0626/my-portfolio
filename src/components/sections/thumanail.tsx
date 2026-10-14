@@ -4,7 +4,7 @@ import { ThumbnailCard } from "../ui/thumbnail-card";
 export default function ThumbnailSection() {
     return (
         <section
-            id="projects"
+            id="Projects"
             className={cn(
                 "relative min-h-svh w-full",
                 "flex items-center justify-center",
