@@ -133,7 +133,7 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
     return (
         <div
             className={cn(
-                "relative size-4/5 lg:size-7/10 bg-card shadow-2xl flex flex-col",
+                "relative size-[80svh] lg:size-[70svh] bg-card shadow-2xl flex flex-col",
                 "timeline-view animate-zoom-in animate-range-entry",
             )}
         >
