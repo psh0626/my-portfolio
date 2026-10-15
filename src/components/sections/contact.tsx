@@ -52,7 +52,7 @@ export default function Contact() {
                     {contactLinks.map(({ label, detail, href, icon: Icon }) => (
                         <a
                             key={label}
-                            href={label === "Email" ? "#Contact" : href}
+                            href={href}
                             target={label === "Email" ? undefined : "_blank"}
                             rel={label === "Email" ? undefined : "noopener noreferrer"}
                             onClick={() => {

@@ -131,7 +131,12 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
     );
 
     return (
-        <div className="relative size-4/5 bg-card shadow-2xl flex flex-col">
+        <div
+            className={cn(
+                "relative size-4/5 lg:size-7/10 bg-card shadow-2xl flex flex-col",
+                "timeline-view animate-zoom-in animate-range-entry",
+            )}
+        >
             {/* TITLE */}
             <div className="relative col-span-4 bg-amber-600 w-full h-30 shrink-0 flex items-end p-4 select-none">
                 {titleElement ? (

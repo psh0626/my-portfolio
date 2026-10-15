@@ -42,7 +42,7 @@ export default function TopBar() {
                 <div
                     className="flex items-center gap-1.5 md:gap-10 w-fit h-fit px-2 py-1 hover:text-primary/80"
                     onClick={() => {
-                        window.open("#home", "_self");
+                        window.open("#Home", "_self");
                     }}
                 >
                     <span

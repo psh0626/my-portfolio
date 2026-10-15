@@ -109,7 +109,7 @@ export default function HomeSection() {
     );
 
     return (
-        <section id="home" className="min-h-svh w-full bg-background">
+        <section id="Home" className="min-h-svh w-full bg-background">
             <Button
                 variant="outline"
                 onClick={() => {

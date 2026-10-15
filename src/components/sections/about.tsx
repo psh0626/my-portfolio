@@ -17,7 +17,12 @@ import { Separator } from "../ui/separator";
 
 export default function About() {
     return (
-        <section id="About" className={cn("relative w-full overflow-hidden bg-background py-20 sm:py-28")}>
+        <section
+            id="About"
+            className={cn(
+                "relative w-full overflow-hidden bg-background py-20 sm:py-28 timeline-view animate-blurred-fade-in animate-range-entry",
+            )}
+        >
             <div className="pointer-events-none absolute -right-24 top-24 size-72 rounded-full bg-accent/10 blur-3xl" />
             <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div className="mb-8 flex flex-col justify-between gap-4 sm:mb-10 sm:flex-row sm:items-end">

@@ -1,5 +1,5 @@
-import { ProjectLayout, ProjectMedia, ProjectDescription } from "@/components/ui/project-layout";
 import { Button } from "@/components/ui/button";
+import { ProjectDescription, ProjectLayout, ProjectMedia } from "@/components/ui/project-layout";
 import { cn } from "cn";
 import { LuGithub } from "react-icons/lu";
 

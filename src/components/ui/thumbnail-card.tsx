@@ -37,7 +37,7 @@ export function ThumbnailCard({
     return (
         <div
             className={cn(
-                "group relative h-28 sm:h-72 w-full perspective-midrange",
+                "group relative h-28 sm:h-62 w-full perspective-midrange",
                 "transition-transform delay-200 duration-600",
                 "hover:z-2 hover:scale-120",
                 isTouched && "z-2 scale-120",

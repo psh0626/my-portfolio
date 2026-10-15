@@ -2,15 +2,15 @@ import { cn } from "@/lib/utils";
 import { LuGithub, LuLinkedin } from "react-icons/lu";
 
 const navigation = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "#Home" },
     { label: "About", href: "#About" },
-    { label: "Projects", href: "#projects" },
+    { label: "Projects", href: "#Projects" },
     { label: "Contact", href: "#Contact" },
 ];
 
 export default function Footer() {
     return (
-        <footer id="Footer" className={cn("w-full bg-background px-2 py-4 sm:px-4 sm:py-8")}>
+        <footer id="Footer" className={cn("w-full bg-background dark:bg-gray-800 px-2 py-4 sm:px-4 sm:py-8")}>
             <div className="mx-auto flex w-full max-w-6xl flex-col gap-4">
                 <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-center">
                     <a
