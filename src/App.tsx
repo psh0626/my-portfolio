@@ -8,7 +8,7 @@ import TrackPost from "./components/sections/projects/trackpost";
 import ThumbnailSection from "./components/sections/thumanail";
 import TopBar from "./components/sections/topbar";
 
-export const RESUME_URL = "https://1drv.ms/b/c/79782aecfec469b0/IQBNAwRubc9uR6d-CU8XM0tsAXf7lsVLEMHi7_7jMKbZyrw";
+export const RESUME_URL = "https://drive.usercontent.google.com/download?id=1F0JOyF2b1uDi7pZkyt6Dii0e5eWIp9jk&export=download";
 
 function App() {
     return (
