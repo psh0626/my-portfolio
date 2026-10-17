@@ -102,14 +102,14 @@ export default function HomeSection() {
     const responsiveOptions = useMemo(
         () => ({
             ...particleOptions,
-            detectRetina: window.devicePixelRatio <= 2,
+            // detectRetina: window.devicePixelRatio <= 2,
             fpsLimit: window.innerWidth < 768 ? 60 : 120,
         }),
         [particleOptions],
     );
 
     return (
-        <section id="Home" className="min-h-svh w-full bg-background">
+        <section id="Home" className="h-svh w-full bg-background">
             <Button
                 variant="outline"
                 onClick={() => {

@@ -4,7 +4,7 @@ export default function BookCollector() {
     return (
         <section
             id="BookCollector"
-            className={cn("h-dvh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
+            className={cn("h-svh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
         >
             <ProjectLayout title="BookCollector" subTitle="VBA macro PowerQuery M">
                 <ProjectMedia src="/excel.png" />

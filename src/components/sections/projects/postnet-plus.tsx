@@ -7,7 +7,7 @@ export default function PostnetPlus() {
     return (
         <section
             id="PostnetPlus"
-            className={cn("h-dvh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
+            className={cn("h-svh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
         >
             <ProjectLayout title="PostnetPlus" subTitle="Chrome Extension - Javascript">
                 <ProjectMedia src="/postnet-plus.png" />
