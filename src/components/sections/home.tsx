@@ -2,7 +2,7 @@ import { RESUME_URL } from "@/App";
 import { cn } from "@/lib/utils";
 import type { ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { LuGithub, LuLinkedin, LuMoon, LuSun } from "react-icons/lu";
 import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 const SET_PARTICLE_COUNT = 120;
 export default function HomeSection() {
     const { theme, setTheme } = useTheme();
+    const [transitionTheme, setTransitionTheme] = useState<"dark" | "light" | null>(null);
 
     const particleOptions = useMemo(
         () =>
@@ -108,21 +109,48 @@ export default function HomeSection() {
         [particleOptions],
     );
 
+    const toggleTheme = () => {
+        if (transitionTheme) return;
+        const change = theme === "dark" ? "light" : "dark";
+        setTransitionTheme(change);
+        setTimeout(() => setTheme(change), 300);
+    };
+
+    const finishThemeTransition = () => {
+        if (!transitionTheme) return;
+        // setTheme(transitionTheme);
+        setTransitionTheme(null);
+    };
+
     return (
         <section id="Home" className="h-svh w-full bg-background">
+            {transitionTheme && (
+                <div
+                    aria-hidden="true"
+                    className={cn(
+                        "fixed inset-0 pointer-events-none",
+                        transitionTheme === "dark" ? "bg-dark-bg" : "bg-light-bg",
+                        "theme-swipe",
+                        "transition-colors",
+                    )}
+                    onAnimationEnd={finishThemeTransition}
+                />
+            )}
             <Button
                 variant="outline"
-                onClick={() => {
-                    setTheme(theme === "dark" ? "light" : "dark");
-                }}
-                className={cn("absolute top-5 right-5 z-10")}
+                onClick={toggleTheme}
+                disabled={transitionTheme !== null}
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+                className={cn("absolute top-5 right-5 z-1")}
             >
                 {theme === "dark" ? <LuSun /> : <LuMoon />}
             </Button>
             <Particles id="bg-particles" options={responsiveOptions} className="w-full h-svh" />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                <h1 className="text-6xl font-bold text-center select-none">Sunghoon Park</h1>
-                <label className="text-2xl font-semibold text-center select-none">a Web Developer</label>
+                <h1 className="text-6xl font-bold text-center select-none transition-colors">Sunghoon Park</h1>
+                <label className="text-2xl font-semibold text-center select-none transition-colors">
+                    a Web Developer
+                </label>
                 <div className="flex gap-2 mt-6">
                     <Button
                         variant="outline"
