@@ -104,41 +104,44 @@ export default function About() {
                             ))}
                         </div>
                     </article>
+
                     {[
                         {
                             color: "bg-card",
                             icon: LuCompass,
                             label: "Mindset",
                             title: "Curious",
-                            description: "Driven by curiosity and a constant desire to learn, explore, and understand.",
+                            description: "Constant desire to learn, explore, and understand.",
                         },
                         {
                             color: "bg-secondary/70",
-                            icon: LuHammer,
-                            label: "Approach",
-                            title: "Builder",
-                            description: "Enjoy creating things from scratch and bringing ideas to life.",
-                        },
-                        {
-                            color: "bg-card",
                             icon: LuNetwork,
                             label: "Drive",
                             title: "Self-Starter",
                             description: "Take initiative, adapt quickly, and move forward.",
                         },
                         {
-                            color: "bg-secondary/70",
+                            color: "bg-card",
                             icon: LuLightbulb,
                             label: "Attitude",
                             title: "Persistent",
-                            description: "Enjoy the challenge of untangling problems and improving how things work.",
+                            description: "Enjoy the challenge of problems and improving the project",
                         },
-                    ].map((item) => (
+                        {
+                            color: "bg-secondary/70",
+                            icon: LuHammer,
+                            label: "Approach",
+                            title: "Builder",
+                            description: "Create things from scratch and bring ideas to life.",
+                        },
+                    ].map((item, idx) => (
                         <article
                             key={item.title}
                             className={cn(
                                 "group flex flex-col justify-between border border-border p-5 transition-transform hover:-translate-y-1 sm:p-6",
                                 item.color,
+                                "intersect:animate-blurred-fade-in",
+                                `intersect:animate-delay-${200 * (idx + 1)}`,
                             )}
                         >
                             <div className="flex items-center justify-between">
@@ -146,7 +149,7 @@ export default function About() {
                                     <item.icon aria-hidden="true" className="size-5" />
                                 </span>
                                 <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                                    {item.label}
+                                    {/* {item.label} */}
                                 </span>
                             </div>
                             <div>

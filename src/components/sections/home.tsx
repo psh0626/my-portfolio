@@ -147,8 +147,10 @@ export default function HomeSection() {
             </Button>
             <Particles id="bg-particles" options={responsiveOptions} className="w-full h-svh" />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                <h1 className="text-6xl font-bold text-center select-none transition-colors">Sunghoon Park</h1>
-                <label className="text-2xl font-semibold text-center select-none transition-colors">
+                <h1 className="text-6xl font-bold text-center select-none transition-all intersect:animate-slide-in-bottom">
+                    Sunghoon Park
+                </h1>
+                <label className="text-2xl font-semibold text-center select-none transition intersect:animate-slide-up-fade intersect:animate-delay-400">
                     a Web Developer
                 </label>
                 <div className="flex gap-2 mt-6">

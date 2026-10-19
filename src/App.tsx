@@ -8,12 +8,16 @@ import PostnetPlus from "./components/sections/projects/postnet-plus";
 import TrackPost from "./components/sections/projects/trackpost";
 import ThumbnailSection from "./components/sections/thumanail";
 import TopBar from "./components/sections/topbar";
+import { Observer } from "tailwindcss-intersect/observer";
+
 
 export const RESUME_URL =
     "https://drive.usercontent.google.com/download?id=1F0JOyF2b1uDi7pZkyt6Dii0e5eWIp9jk&export=download";
 
 function App() {
     useEffect(() => {
+        Observer.start();
+        
         if (typeof window === "undefined" || typeof navigator === "undefined") {
             return;
         }
