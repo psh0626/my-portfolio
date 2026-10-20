@@ -13,6 +13,7 @@ interface DescriptionProps extends BaseLayoutProps {
 }
 interface MediaProps extends BaseLayoutProps {
     src?: string | string[];
+    shrink?: boolean;
 }
 interface WithTitleProps extends BaseLayoutProps {
     title: string; // Title이 있으면
@@ -78,7 +79,7 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
 
     const titleElement = childrenArr.find((c) => c.type === ProjectTitle);
 
-    const pageMedia = childrenArr.filter((c) => c.type === ProjectMedia);
+    const pageMedia = childrenArr.filter((c): c is ReactElement<MediaProps> => c.type === ProjectMedia);
 
     const pageDescs = childrenArr.filter((c) => c.type === ProjectDescription);
 
@@ -98,37 +99,61 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
         goToPage(to, where);
     };
 
-    const renderPage = (page: number, className: string, onAnimationEnd?: () => void) => (
-        <div className={cn("absolute inset-0 flex flex-col md:flex-row", className)} onAnimationEnd={onAnimationEnd}>
-            <div className={cn("flex-1", "p-4 bg-accent min-h-1/2 md:min-h-full", "flex justify-center")}>
-                <Dialog>
-                    <DialogTrigger>
-                        <ScrollArea className={"h-full w-full pb-3"}>
-                            <ScrollBar orientation="horizontal" />
-                            <div className="flex h-full gap-2 select-none">{pageMedia[page]}</div>
-                        </ScrollArea>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogTitle className={"font-sans"}>Photo viewer</DialogTitle>
-                        <DialogDescription>
-                            <ScrollArea>
-                                <div className="flex flex-col max-h-120 max-w-100 items-center gap-2 pr-4">
-                                    {pageMedia[page]}
-                                </div>
+    const renderPage = (page: number, className: string, onAnimationEnd?: () => void) => {
+        const media = pageMedia[page];
+        const mediaShrink = media.props.shrink;
+        const desc = pageDescs[page];
+
+        return (
+            <div
+                className={cn("absolute inset-0 flex flex-col md:flex-row", className)}
+                onAnimationEnd={onAnimationEnd}
+            >
+                <div
+                    className={cn(
+                        "flex-1",
+                        "p-4 bg-accent",
+                        mediaShrink ? "h-1/3" : "h-1/2",
+                        "md:h-full",
+                        "flex justify-center",
+                    )}
+                >
+                    <Dialog>
+                        <DialogTrigger>
+                            <ScrollArea className={"h-full w-full pb-3"}>
+                                <ScrollBar orientation="horizontal" />
+                                <div className="flex h-full gap-2 select-none">{media}</div>
                             </ScrollArea>
-                        </DialogDescription>
-                    </DialogContent>
-                </Dialog>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogTitle className={"font-sans"}>Photo viewer</DialogTitle>
+                            <DialogDescription>
+                                <ScrollArea>
+                                    <div className="flex flex-col max-h-120 max-w-100 items-center gap-2 pr-4">
+                                        {media}
+                                    </div>
+                                </ScrollArea>
+                            </DialogDescription>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+                <div
+                    className={cn(
+                        "flex-1 bg-amber-700 dark:bg-card",
+                        mediaShrink ? "min-h-2/3 max-h-2/3" : "max-h-1/2",
+                        "md:h-full",
+                        "flex p-4",
+                    )}
+                >
+                    <ScrollArea className={"p-4 w-full"}>
+                        <span className="text-card dark:text-gray-200 whitespace-break-spaces text-justify">
+                            {desc}
+                        </span>
+                    </ScrollArea>
+                </div>
             </div>
-            <div className={cn("flex-1 bg-amber-700 dark:bg-card", "max-h-1/2 md:max-h-none p-4", "flex")}>
-                <ScrollArea className={"p-4 w-full"}>
-                    <span className="text-card dark:text-gray-200 whitespace-break-spaces text-justify">
-                        {pageDescs[page]}
-                    </span>
-                </ScrollArea>
-            </div>
-        </div>
-    );
+        );
+    };
 
     return (
         <div

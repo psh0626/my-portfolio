@@ -10,7 +10,7 @@ export default function PostnetPlus() {
             className={cn("h-svh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
         >
             <ProjectLayout title="PostnetPlus" subTitle="Chrome Extension - Javascript">
-                <ProjectMedia src="/postnet-plus.png" />
+                <ProjectMedia src="/postnet-plus.png" shrink />
                 <ProjectDescription title="Project Overview">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -34,7 +34,7 @@ export default function PostnetPlus() {
                         </Button>
                     </a>
                 </ProjectDescription>
-                <ProjectMedia src="/postnet-plus.png" />
+                <ProjectMedia src="/postnet-plus.png" shrink />
                 <ProjectDescription title="Tech Stack">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>JavaScript (ES5 / ES6+)</li>
@@ -49,7 +49,7 @@ export default function PostnetPlus() {
                         <li>Legacy System Integration</li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/postnet-plus.png" />
+                <ProjectMedia src="/postnet-plus.png" shrink />
                 <ProjectDescription title="Technical Challenges">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>

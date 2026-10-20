@@ -7,7 +7,7 @@ export default function BookCollector() {
             className={cn("h-svh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
         >
             <ProjectLayout title="BookCollector" subTitle="VBA macro PowerQuery M">
-                <ProjectMedia src="/excel.png" />
+                <ProjectMedia src="/excel.png" shrink />
                 <ProjectDescription title="Project Overview">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -18,7 +18,7 @@ export default function BookCollector() {
                         <li>Support centralized automatic updates through a shared network distribution system.</li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/excel.png" />
+                <ProjectMedia src="/excel.png" shrink />
                 <ProjectDescription title="Tech Stack">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>Microsoft Excel</li>
@@ -30,7 +30,7 @@ export default function BookCollector() {
                         <li>Automatic Update Distribution</li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/excel.png" />
+                <ProjectMedia src="/excel.png" shrink />
                 <ProjectDescription title="Technical Challenges">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -47,7 +47,7 @@ export default function BookCollector() {
                         </li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/excel.png" />
+                <ProjectMedia src="/excel.png" shrink />
                 <ProjectDescription title="Features">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -72,7 +72,7 @@ export default function BookCollector() {
                         </li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/excel.png" />
+                <ProjectMedia src="/excel.png" shrink />
                 <ProjectDescription title="Business Impact">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>Reduced report preparation time from one day to less than one minute.</li>

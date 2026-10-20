@@ -15,7 +15,7 @@ export default function TrackPost() {
             )}
         >
             <ProjectLayout title="TrackPost" subTitle="Chrome Extension - TypeScript/React">
-                <ProjectMedia src="/trackpost.png" />
+                <ProjectMedia src="/trackpost.png" shrink />
                 <ProjectDescription title="Project Overview">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>Built a Chrome extension that automates repetitive workflows for postal service agents.</li>
@@ -39,7 +39,7 @@ export default function TrackPost() {
                         </Button>
                     </a>
                 </ProjectDescription>
-                <ProjectMedia src="/trackpost.png" />
+                <ProjectMedia src="/trackpost.png" shrink />
                 <ProjectDescription title="Tech Stack">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -87,7 +87,7 @@ export default function TrackPost() {
                         </li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/trackpost.png" />
+                <ProjectMedia src="/trackpost.png" shrink />
                 <ProjectDescription title="Form autofill">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
@@ -96,7 +96,7 @@ export default function TrackPost() {
                         </li>
                     </ul>
                 </ProjectDescription>
-                <ProjectMedia src="/trackpost.png" />
+                <ProjectMedia src="/trackpost.png" shrink />
                 <ProjectDescription title="Productivity Features">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>
