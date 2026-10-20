@@ -141,7 +141,7 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
                     className={cn(
                         "flex-1 bg-amber-700 dark:bg-card",
                         mediaShrink ? "min-h-2/3 max-h-2/3" : "max-h-1/2",
-                        "md:h-full",
+                        "md:min-h-full md:max-h-full",
                         "flex p-4",
                     )}
                 >
