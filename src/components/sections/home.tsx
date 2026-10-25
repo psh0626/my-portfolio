@@ -8,16 +8,21 @@ import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
 
 const SET_PARTICLE_COUNT = 120;
+
 export default function HomeSection() {
     const { theme, setTheme } = useTheme();
     const [transitionTheme, setTransitionTheme] = useState<"dark" | "light" | null>(null);
+
+    const isDark =
+        theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const computedFG = isDark ? "#FCF9EA" : "#070F2B";
 
     const particleOptions = useMemo(
         () =>
             ({
                 fullScreen: { enable: false },
                 background: {
-                    color: "hsl(var(--background))",
+                    color: "var(--background)",
                     size: "100% 100%",
                 },
                 particles: {
@@ -29,7 +34,7 @@ export default function HomeSection() {
                         },
                     },
                     paint: {
-                        color: theme === "dark" ? "#ffffff" : "#333333",
+                        color: computedFG,
                     },
                     shape: {
                         type: "triangle",
@@ -44,12 +49,12 @@ export default function HomeSection() {
                     links: {
                         enable: true,
                         distance: 150,
-                        color: theme === "dark" ? "#ffffff" : "#333333",
+                        color: computedFG,
                         opacity: 0.8,
                         width: 1,
                         triangles: {
                             enable: true,
-                            color: theme === "dark" ? "#ffffff" : "#333333",
+                            color: computedFG,
                             opacity: 0.1,
                         },
                     },
@@ -97,7 +102,7 @@ export default function HomeSection() {
                 },
                 retina_detect: true,
             }) as ISourceOptions,
-        [theme],
+        [computedFG],
     );
 
     const responsiveOptions = useMemo(
