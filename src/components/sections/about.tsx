@@ -134,30 +134,31 @@ export default function About() {
                             title: "Builder",
                             description: "Create things from scratch and bring ideas to life.",
                         },
-                    ].map((item, idx) => (
-                        <article
-                            key={item.title}
-                            className={cn(
-                                "group flex flex-col justify-between border border-border p-5 transition-transform hover:-translate-y-1 sm:p-6",
-                                item.color,
-                                "intersect:animate-blurred-fade-in",
-                                `intersect:animate-delay-${200 * (idx + 1)}`,
-                            )}
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="grid size-10 place-items-center rounded-xl text-primary">
-                                    <item.icon aria-hidden="true" className="size-5" />
-                                </span>
-                                <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                                    {/* {item.label} */}
-                                </span>
-                            </div>
-                            <div>
-                                <p className="text-4xl font-black tracking-tight text-foreground">{item.title}</p>
-                                <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
-                            </div>
-                        </article>
-                    ))}
+                    ].map((item) => {
+                        return (
+                            <article
+                                key={item.title}
+                                className={cn(
+                                    "group flex flex-col justify-between border border-border p-5 transition-transform hover:-translate-y-1 sm:p-6",
+                                    item.color,
+                                    "intersect:animate-blurred-fade-in",
+                                )}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span className="grid size-10 place-items-center rounded-xl text-primary">
+                                        <item.icon aria-hidden="true" className="size-5" />
+                                    </span>
+                                    <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                                        {/* {item.label} */}
+                                    </span>
+                                </div>
+                                <div>
+                                    <p className="text-4xl font-black tracking-tight text-foreground">{item.title}</p>
+                                    <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
+                                </div>
+                            </article>
+                        );
+                    })}
                 </div>
             </div>
         </section>

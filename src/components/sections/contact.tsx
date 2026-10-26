@@ -34,7 +34,12 @@ export default function Contact() {
             <div className="relative mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
                 <div className="max-w-xl">
                     <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-foreground/60">Contact</p>
-                    <h2 className="font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl">
+                    <h2
+                        className={cn(
+                            "font-heading text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl",
+                            "-translate-x-[100%] intersect:translate-x-0 transition duration-700",
+                        )}
+                    >
                         Are you
                         <br />
                         interested?
