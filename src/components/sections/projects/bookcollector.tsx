@@ -7,7 +7,7 @@ export default function BookCollector() {
             className={cn("h-svh w-full", "bg-[#DB9558] dark:bg-background", "flex justify-center items-center")}
         >
             <ProjectLayout title="BookCollector" subTitle="VBA macro PowerQuery M">
-                <ProjectMedia src="/excel.png" shrink />
+                <ProjectMedia src="/BookCollector.webm" shrink />
                 <ProjectDescription title="Project Overview">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>

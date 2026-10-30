@@ -36,6 +36,9 @@ export function ProjectMedia({ src, children }: MediaProps) {
                 </>
             );
         }
+        if (src.endsWith(".webm")) {
+            return <video src={src} className="object-contain max-h-full max-w-full" autoPlay loop muted />;
+        }
         return <img src={src} className="object-contain max-h-full max-w-full" />;
     }
 
@@ -120,7 +123,12 @@ export function ProjectLayout({ title, subTitle, children }: ProjectLayoutProps)
                 >
                     <Dialog>
                         <DialogTrigger>
-                            <ScrollArea className={"h-full w-full pb-3"}>
+                            <ScrollArea
+                                className={cn(
+                                    "h-full w-full ",
+                                    (Array.isArray(media.props.src) ? media.props.src.length : 0) > 1 && "pb-3",
+                                )}
+                            >
                                 <ScrollBar orientation="horizontal" />
                                 <div className="flex h-full gap-2 select-none">{media}</div>
                             </ScrollArea>

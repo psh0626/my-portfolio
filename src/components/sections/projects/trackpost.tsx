@@ -15,7 +15,7 @@ export default function TrackPost() {
             )}
         >
             <ProjectLayout title="TrackPost" subTitle="Chrome Extension - TypeScript/React">
-                <ProjectMedia src="/trackpost.png" shrink />
+                <ProjectMedia src="/TrackPost.webm" shrink />
                 <ProjectDescription title="Project Overview">
                     <ul className="list-[square] list-insde pl-6 mb-3 text-left">
                         <li>Built a Chrome extension that automates repetitive workflows for postal service agents.</li>
