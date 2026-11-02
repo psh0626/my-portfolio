@@ -1,8 +1,8 @@
 import { RESUME_URL } from "@/App";
 import { cn } from "@/lib/utils";
-import type { ISourceOptions } from "@tsparticles/engine";
+import type { Container, ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { LuGithub, LuLinkedin, LuMoon, LuSun } from "react-icons/lu";
 import { useTheme } from "../theme-provider";
 import { Button } from "../ui/button";
@@ -12,6 +12,7 @@ const SET_PARTICLE_COUNT = 120;
 export default function HomeSection() {
     const { theme, setTheme } = useTheme();
     const [transitionTheme, setTransitionTheme] = useState<"dark" | "light" | null>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const isDark =
         theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
@@ -105,6 +106,11 @@ export default function HomeSection() {
         [computedFG],
     );
 
+    const particlesLoaded = useCallback(async (container: Container | undefined) => {
+        console.log("Particles container loaded", container);
+        setIsLoaded(true);
+    }, []);
+
     const responsiveOptions = useMemo(
         () => ({
             ...particleOptions,
@@ -150,53 +156,60 @@ export default function HomeSection() {
             >
                 {theme === "dark" ? <LuSun /> : <LuMoon />}
             </Button>
-            <Particles id="bg-particles" options={responsiveOptions} className="w-full h-svh" />
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                <h1 className="text-6xl font-bold text-center select-none transition-all intersect:animate-slide-in-bottom">
-                    Sunghoon Park
-                </h1>
-                <label className="text-2xl font-semibold text-center select-none transition intersect:animate-slide-up-fade intersect:animate-delay-400">
-                    a Web Developer
-                </label>
-                <div className="flex gap-2 mt-6">
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="px-4 py-1"
-                        onClick={() => window.open("#Projects", "_self", "noopener,noreferrer")}
-                    >
-                        Projects
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="px-4 py-1"
-                        onClick={() => window.open(RESUME_URL, "_blank")}
-                    >
-                        Resume
-                    </Button>
-                    <Button
-                        variant="default"
-                        size="lg"
-                        className="px-4 py-1"
-                        onClick={() => window.open("#Contact", "_self")}
-                    >
-                        Contact
-                    </Button>
-                </div>
-                <div className="flex gap-1 mt-4">
-                    <a href="https://github.com/psh0626" target="_blank" rel="noopener noreferrer">
-                        <Button variant="ghost">
-                            <LuGithub />
+            <Particles
+                id="bg-particles"
+                options={responsiveOptions}
+                className="w-full h-svh"
+                particlesLoaded={particlesLoaded}
+            />
+            {isLoaded && (
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+                    <h1 className="text-6xl font-bold text-center select-none transition-all intersect:animate-slide-in-bottom">
+                        Sunghoon Park
+                    </h1>
+                    <label className="text-2xl font-semibold text-center select-none transition intersect:animate-slide-up-fade intersect:animate-delay-400">
+                        a Web Developer
+                    </label>
+                    <div className="flex gap-2 mt-6">
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="px-4 py-1"
+                            onClick={() => window.open("#Projects", "_self", "noopener,noreferrer")}
+                        >
+                            Projects
                         </Button>
-                    </a>
-                    <a href="https://www.linkedin.com/in/psh0626" target="_blank" rel="noopener noreferrer">
-                        <Button variant="ghost">
-                            <LuLinkedin />
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="px-4 py-1"
+                            onClick={() => window.open(RESUME_URL, "_blank")}
+                        >
+                            Resume
                         </Button>
-                    </a>
+                        <Button
+                            variant="default"
+                            size="lg"
+                            className="px-4 py-1"
+                            onClick={() => window.open("#Contact", "_self")}
+                        >
+                            Contact
+                        </Button>
+                    </div>
+                    <div className="flex gap-1 mt-4">
+                        <a href="https://github.com/psh0626" target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost">
+                                <LuGithub />
+                            </Button>
+                        </a>
+                        <a href="https://www.linkedin.com/in/psh0626" target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost">
+                                <LuLinkedin />
+                            </Button>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            )}
         </section>
     );
 }
