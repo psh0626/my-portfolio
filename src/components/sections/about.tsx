@@ -1,4 +1,3 @@
-import { RESUME_URL } from "@/App";
 import { cn } from "@/lib/utils";
 import {
     LuArrowDownRight,
@@ -35,7 +34,7 @@ export default function About() {
                         </h2>
                     </div>
                     <a
-                        href={RESUME_URL}
+                        href="/resume"
                         target="_blank"
                         className="group inline-flex w-fit items-center gap-2 pb-1 text-sm font-semibold text-foreground transition-colors hover:text-primary"
                     >

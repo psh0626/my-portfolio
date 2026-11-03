@@ -1,4 +1,3 @@
-import { RESUME_URL } from "@/App";
 import { cn } from "@/lib/utils";
 import type { Container, ISourceOptions } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
@@ -183,7 +182,7 @@ export default function HomeSection() {
                             variant="outline"
                             size="lg"
                             className="px-4 py-1"
-                            onClick={() => window.open(RESUME_URL, "_blank")}
+                            onClick={() => window.open("/resume", "_blank", "noopener,noreferrer")}
                         >
                             Resume
                         </Button>

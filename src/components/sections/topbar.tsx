@@ -1,4 +1,3 @@
-import { RESUME_URL } from "@/App";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
@@ -102,7 +101,7 @@ export default function TopBar() {
                         variant="secondary"
                         size="xs"
                         className="px-2 bg-background/10"
-                        onClick={() => window.open(RESUME_URL, "_blank")}
+                        onClick={() => window.open("/resume", "_blank")}
                     >
                         Resume
                     </Button>
