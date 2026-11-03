@@ -5,6 +5,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
+import Resume from "./components/sections/resume.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import { Toaster } from "./components/ui/toast.tsx";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
@@ -22,7 +23,7 @@ createRoot(document.getElementById("root")!).render(
                     <TooltipProvider>
                         <Routes>
                             <Route index element={<App />} />
-                            {/* <Route path="resume" /> */}
+                            <Route path="resume" element={<Resume />} />
                         </Routes>
                         <Toaster />
                     </TooltipProvider>
