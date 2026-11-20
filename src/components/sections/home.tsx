@@ -167,7 +167,7 @@ export default function HomeSection() {
                         Sunghoon Park
                     </h1>
                     <label className="text-2xl font-semibold text-center select-none transition intersect:animate-slide-up-fade intersect:animate-delay-400">
-                        a Web Developer
+                        a Problem Solver
                     </label>
                     <div className="flex gap-2 mt-6">
                         <Button

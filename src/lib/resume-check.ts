@@ -20,7 +20,7 @@ function prompt(query: string, prefill: string) {
 }
 
 async function main() {
-    const remoteResumePath = env.ONEDRIVE + "\\Personal\\Canada\\Resume\\Sunghoon_Park_Resume.pdf";
+    const remoteResumePath = env.ONEDRIVE + "\\Personal\\Canada\\Resume\\Sunghoon Park Resume-G.pdf";
     if (!fs.existsSync(remoteResumePath)) {
         console.error(`[REMOTE] Resume not found at path: ${remoteResumePath}`);
         process.exit(1);
@@ -56,6 +56,6 @@ async function main() {
     }
 }
 
-main();
+await main();
 
 process.exit(0);
