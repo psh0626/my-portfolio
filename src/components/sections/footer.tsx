@@ -43,7 +43,7 @@ export default function Footer() {
                             <LuGithub aria-hidden="true" className="size-4" />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/psh0626"
+                            href="https://linkedin.sunghoonpark.net/"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="LinkedIn"

@@ -18,7 +18,7 @@ const contactLinks = [
     {
         label: "LinkedIn",
         detail: "linkedin.com/in/psh0626",
-        href: "https://www.linkedin.com/in/psh0626",
+        href: "https://linkedin.sunghoonpark.net/",
         icon: LuLinkedin,
     },
 ];

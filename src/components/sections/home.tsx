@@ -201,7 +201,7 @@ export default function HomeSection() {
                                 <LuGithub />
                             </Button>
                         </a>
-                        <a href="https://www.linkedin.com/in/psh0626" target="_blank" rel="noopener noreferrer">
+                        <a href="https://linkedin.sunghoonpark.net/" target="_blank" rel="noopener noreferrer">
                             <Button variant="ghost">
                                 <LuLinkedin />
                             </Button>
